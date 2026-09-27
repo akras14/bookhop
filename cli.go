@@ -137,6 +137,7 @@ func cmdSend(args []string) error {
 		fmt.Printf("done in %.1fs (%.1f MB/s)\n", secs, float64(it.size)/1e6/max(secs, 0.001))
 	}
 	fmt.Println("Done! Open BookPlayer on your iPhone.")
+	fmt.Println("If the books don't show up, pull down on BookPlayer's library list to refresh.")
 	return nil
 }
 

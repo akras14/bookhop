@@ -1,3 +1,5 @@
 /bookhop
 /bookhop.exe
 /dist/
+/build/
+.DS_Store

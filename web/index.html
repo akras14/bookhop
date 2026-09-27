@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Send Books to iPhone</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Send Books to iPhone</h1>
+
+  <p id="status" class="status wait" role="status" aria-live="polite">
+    <span class="dot" aria-hidden="true"></span>
+    <span id="status-text">Looking for your iPhone…</span>
+  </p>
+  <p id="status-help" class="help" hidden></p>
+
+  <section id="drop" class="drop disabled" tabindex="0" aria-label="Drop books here">
+    <div class="drop-icon" aria-hidden="true">📚</div>
+    <p class="drop-title">Drag books here</p>
+    <p class="drop-sub">Audiobook files or whole folders</p>
+    <div class="buttons">
+      <button id="pick" type="button" class="button">Add Files…</button>
+      <button id="pick-folder" type="button" class="button">Add Folder…</button>
+    </div>
+    <input id="file" type="file" multiple accept=".mp3,.m4a,.m4b,.zip" hidden>
+    <input id="folder" type="file" webkitdirectory hidden>
+  </section>
+
+  <section id="progress" class="progress" hidden>
+    <p id="progress-text" class="progress-text">Sending…</p>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div id="bar-fill" class="bar-fill"></div>
+    </div>
+    <p id="progress-file" class="progress-file"></p>
+  </section>
+
+  <section id="done" class="done" hidden>
+    <p class="done-title">✅ Done! Open BookPlayer</p>
+    <p class="done-sub">Your books are waiting in BookPlayer on your iPhone.</p>
+    <button id="again" type="button" class="button secondary">Send more books</button>
+  </section>
+
+  <section id="error" class="error" hidden>
+    <p id="error-text" class="error-title"></p>
+    <button id="retry" type="button" class="button secondary">Try again</button>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

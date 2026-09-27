@@ -7,7 +7,7 @@ GOBUILD := CGO_ENABLED=0 go build -trimpath -ldflags "$(LDFLAGS)"
 WINRES  := go run github.com/tc-hib/go-winres@v0.3.3
 APP     := $(DIST)/$(NAME).app
 
-.PHONY: all build darwin-arm64 darwin-amd64 windows-amd64 mac-app icons vet clean
+.PHONY: all build darwin-arm64 darwin-amd64 windows-amd64 mac-app icons release vet clean
 
 all: darwin-arm64 darwin-amd64 windows-amd64 mac-app
 
@@ -44,6 +44,16 @@ icons:
 		--product-name "$(NAME)" --file-description "$(NAME)" \
 		--product-version $(VERSION) --file-version $(VERSION) \
 		--original-filename $(BIN).exe
+
+# Publish dist/ builds as GitHub release v$(VERSION). Bump VERSION first;
+# the tag is created on the current commit, so commit and push before this.
+release: clean all
+	cd $(DIST) && ditto -c -k --keepParent "$(NAME).app" "Send-Books-to-iPhone-mac.zip"
+	gh release create v$(VERSION) --title "$(NAME) $(VERSION)" --generate-notes \
+		$(DIST)/$(BIN).exe \
+		$(DIST)/Send-Books-to-iPhone-mac.zip \
+		$(DIST)/$(BIN)-darwin-arm64 \
+		$(DIST)/$(BIN)-darwin-amd64
 
 vet:
 	go vet ./...
